@@ -1,0 +1,27 @@
+<?php
+
+use yii\helpers\Html;
+
+/** @var yii\web\View $this */
+/** @var app\models\Course $model */
+
+$this->title = 'Изменить курс: ' . $model->title;
+$this->params['breadcrumbs'][] = ['label' => 'Courses', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = 'Update';
+?>
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-12 col-lg-7 mx-auto">
+            <div class="course-update">
+
+                <h1><?= Html::encode($this->title) ?></h1>
+
+                <?= $this->render('_form', [
+                    'model' => $model,
+                ]) ?>
+
+            </div>
+        </div>
+    </div>
+</div>

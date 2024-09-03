@@ -1,0 +1,10 @@
+:root{
+    --c1 : #0abab4b0;
+    --c2 : pink;
+    --c3 :orange;
+    --c4 : darkgray;
+}
+
+.bg-theme{
+    background-color: var(--c1);
+}
