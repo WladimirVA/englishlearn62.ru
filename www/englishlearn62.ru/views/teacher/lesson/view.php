@@ -2,9 +2,9 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\bootstrap5\Breadcrumbs;
 
-/** @var yii\web\View $this */
-/** @var app\models\Lesson $model */
+
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Lessons', 'url' => ['index']];
@@ -12,6 +12,25 @@ $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="container mt-3">
+    <div class="row mt-4">
+        <div class="col">
+            <?= Breadcrumbs::widget([
+                'links' => [
+                    [
+                        'label' => 'Мой кабинет',
+                        'url' => '/teacher/home'
+                    ],
+                    [
+                        'label' => 'Уроки',
+                        'url' => '/teacher/lesson'
+                    ],
+                    [
+                        'label' => $this->title
+                    ]
+                ]
+            ]) ?>
+        </div>
+    </div>
     <div class="row">
         <div class="col-12 col-lg-7 mx-auto">
             <div class="lesson-view">
@@ -34,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attributes' => [
                         'course.title',
                         'title',
-                        'content:ntext',
+                        //'content:ntext',
                         'order',
                     ],
                 ]) ?>

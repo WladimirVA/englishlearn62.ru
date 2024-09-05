@@ -19,7 +19,7 @@ class AppAsset extends AssetBundle
         'css/prism.css'
     ];
     public $js = [
-        'js/bs.js'
+        'js/bootstrap.bundle.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

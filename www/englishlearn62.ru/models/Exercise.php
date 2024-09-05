@@ -65,14 +65,46 @@ class Exercise extends \yii\db\ActiveRecord
 
     public function is_correct_sub($student_id)
     {
-        $sub = Submission::find()->where(['exercise_id' => $this -> id, 'student_id' => $student_id])->one();
+        $sub = Submission::find()->where(['exercise_id' => $this -> id, 'student_id' => $student_id])
+        ->orderBy('id DESC')
+        ->one();
         if(empty($sub)) return false;
         return $sub -> is_correct === 1;
     }
 
     public function NotSub($student_id)
     {
-        $sub = Submission::find()->where(['student_id' => $student_id, 'exercise_id' => $this -> id, 'is_correct' => 1])->one();
-        if(!$sub) return true;
+        $sub = Submission::find()->where(['exercise_id' => $this -> id, 'student_id' => $student_id])
+        ->andWhere(['is_correct' => 1])
+        ->all();
+
+        $sub1 = Submission::find()->where(['exercise_id' => $this -> id, 'student_id' => $student_id])
+        ->andWhere(['is_closed' => 0])
+        ->all();
+
+        $empty = Submission::find()->where(['exercise_id' => $this -> id, 'student_id' => $student_id])->all();
+
+
+
+        if(empty($empty) || (empty($sub) && empty($sub1))) return true;
+    }
+
+
+    public function HasComment()
+    {
+        $ex = $this -> submissions;
+
+        if(empty($ex)) return null;
+        $last = end($ex);
+        if($last -> is_correct === 1) return null;
+        if($last -> is_correct === 0 && $last -> is_closed == 1 ){
+           return  $last -> comment;
+        }
+        foreach($ex as $e){
+            if($e -> is_closed){
+                return $e -> comment;
+            }
+        }
+        return null;
     }
 }

@@ -2,10 +2,24 @@
 
 use app\models\Exercise;
 use app\models\Lesson;
-
-$this->title = 'Студент - '. $student -> gfn() . '(мои уроки)';
+use yii\helpers\Url;
+use yii\bootstrap5\Breadcrumbs;
+$this->title = 'Мои уроки';
 ?>
 <div class="container">
+    <div class="row mt-4">
+        <div class="col">
+            <?=Breadcrumbs::widget([
+                'links' => [
+                    [
+                      'label' => 'Мой кабинет',
+                      'url' => '/student/home',
+                    ],
+                    ['label' => $this -> title],
+                ]
+            ])?>
+        </div>
+    </div>
     <div class="row mt-5">
         <div class="col-12 col-lg-8 mx-auto">
             <p class="text-center fs-4 font-monospace text-danger">
@@ -29,7 +43,10 @@ $this->title = 'Студент - '. $student -> gfn() . '(мои уроки)';
                             <ul>
                                 <?php foreach($ex as $e):?>
                                    <li>
-                                        Задание № <?=$e -> id?> <?=$e -> is_correct_sub($student -> id)?'&#9989':''?>
+                                        Задание № <?=$e -> id?>
+                                        <?=$e -> is_correct_sub($student -> id)?'&#9989':''?>
+                                        <?=(bool)($cmt = $e -> hasComment())?"<button type=\"button\" class=\"btn btn-sm btn-danger rounded\" data-bs-toggle=\"tooltip\" data-bs-placement=\"top\"data-bs-custom-class=\"custom-tooltip\"data-bs-title=\"$cmt\">Получен ответ</button>":""?>
+
                                    </li>
                                 <?php endforeach ?>
                             </ul>
@@ -44,3 +61,9 @@ $this->title = 'Студент - '. $student -> gfn() . '(мои уроки)';
     </div>
     </div>
 </div>
+<?=$this -> registerJs(
+    "
+       const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle=\"tooltip\"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    "
+)?>

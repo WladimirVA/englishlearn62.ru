@@ -27,14 +27,22 @@ class RateController extends Controller
         $session = Yii::$app->session;
         $teacher = $session->get('teacher');
 
-        $sub = Submission::find()->where(['is_correct' => 0])->orderBy('id DESC')->all();
+        $sub = Submission::find()->where(['is_correct' => 0, 'is_closed' => 0])->orderBy('id DESC')->all();
 
 
         if ($this->request->isPost) {
             extract($_POST);
+
             if(isset($correct)){
                 $sub = Submission::findOne($sub_id);
                 $sub -> is_correct = 1;
+                $sub -> save();
+                return $this -> refresh();
+            }else{
+                $sub = Submission::findOne($sub_id);
+                $sub -> is_correct = 0;
+                $sub -> is_closed = 1;
+                $sub -> comment = $comment;
                 $sub -> save();
                 return $this -> refresh();
             }

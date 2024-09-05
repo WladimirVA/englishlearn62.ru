@@ -1,15 +1,32 @@
 <?php
 
 use yii\helpers\Html;
+use yii\bootstrap5\Breadcrumbs;
 
-/** @var yii\web\View $this */
-/** @var app\models\Course $model */
 
 $this->title = 'Добавить курс';
-$this->params['breadcrumbs'][] = ['label' => 'Courses', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+;
 ?>
 <div class="container mt-3">
+    <div class="row mt-4">
+        <div class="col">
+            <?= Breadcrumbs::widget([
+                'links' => [
+                    [
+                        'label' => 'Мой кабинет',
+                        'url' => '/teacher/home'
+                    ],
+                    [
+                        'label' => 'Курсы',
+                        'url' => '/teacher/course'
+                    ],
+                    [
+                        'label' => $this -> title
+                    ]
+                ]
+            ]) ?>
+        </div>
+    </div>
     <div class="row">
         <div class="col-12 col-lg-7 mx-auto">
             <div class="course-create">
@@ -18,6 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= $this->render('_form', [
                     'model' => $model,
+                    'files' => $files,
                 ]) ?>
 
             </div>

@@ -8,29 +8,31 @@ use yii\helpers\Html;
 
 class Pie extends Widget
 {
+    public $c;
+    public $e;
+    public $l;
 
     public function init()
     {
+        $c = $this -> c??1;
+        $l = $this -> l??1;
+        $e = $this -> e??1;
         parent::init();
         $js = <<<js
         google.charts.load('current', {'packages':['corechart', 'table', 'sankey']});
         google.charts.setOnLoadCallback(drawChart);
         function drawChart() {
-            var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Topping');
-            data.addColumn('number', 'Slices');
-            data.addRows([
-            ['Mushrooms', 3],
-            ['Onions', 1],
-            ['Olives', 1],
-            ['Zucchini', 1],
-            ['Pepperoni', 2]
-            ]);
-            var options = {'title':'How Much Pizza I Ate Last Night',
-                        'width':400,
-                        'height':300};
+        var data = google.visualization.arrayToDataTable([
+            ['Количество', 'Всего', { role: 'style' } ],
+            ['Заданий', $e, 'color: gray'],
+            ['Уроков', $l, 'color: #76A7FA'],
+            ['Курсов', $c, 'opacity: 0.2'],
+        ]);
+            var options = {'title':'Общее количество учебных материалов',
+                        'width':600,
+                        'height':400};
 
-            var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+            var chart = new google.visualization.ColumnChart(document.getElementById('chart'));
             chart.draw(data, options);
         }
         js;

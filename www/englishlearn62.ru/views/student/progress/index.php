@@ -2,10 +2,24 @@
 
 use app\models\Exercise;
 use app\models\Lesson;
+use yii\bootstrap5\Breadcrumbs;
 
-$this->title = 'Студент - ' . $student->gfn() . '(мой прогресс)';
+$this->title = 'Мой прогресс';
 ?>
 <div class="container">
+    <div class="row mt-4">
+        <div class="col">
+            <?=Breadcrumbs::widget([
+                'links' => [
+                    [
+                      'label' => 'Мой кабинет',
+                      'url' => '/student/home',
+                    ],
+                    ['label' => $this -> title],
+                ]
+            ])?>
+        </div>
+    </div>
     <div class="row mt-5">
         <div class="col-12 col-lg-8 mx-auto">
             <p class="text-center fs-4 font-monospace text-danger">

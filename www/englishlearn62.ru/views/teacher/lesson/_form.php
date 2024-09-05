@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\models\Course;
+use mihaildev\ckeditor\CKEditor;
+
 $teacher_id = $teacher = Yii::$app->session->get('teacher') -> id;
 ?>
 
@@ -17,7 +19,31 @@ $teacher_id = $teacher = Yii::$app->session->get('teacher') -> id;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'content')->widget(CKEditor::class,[
+    'editorOptions' => [
+        'preset' => 'full', //разработанны стандартные настройки basic, standard, full данную возможность не обязательно использовать
+        'inline' => false,
+
+        'disallowedContent' => 'table[border,cellpadding,cellspacing]',
+        'stylesSet' => [
+            [
+                'name' => 'Параграф',
+                'element' => 'p',
+                'attributes' => ['class' => 'text-start']
+            ],
+            [
+                'name' => 'Таблица с границей',
+                'element' => 'table',
+                'attributes' => [
+                    'class' => 'table',
+                ],
+                'styles' => [
+                    'width' => '100%'
+                ],
+            ],
+        ],
+    ],
+]); ?>
 
     <?= $form->field($model, 'order')->textInput() ?>
 

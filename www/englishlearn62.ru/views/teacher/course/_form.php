@@ -10,13 +10,18 @@ use yii\widgets\ActiveForm;
 
 <div class="course-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'options' => ['class' => 'row shadow mb-3 p-2'],
+        'fieldConfig' => [
+            'options' => ['class' => 'mt-5 col-12']
+        ]
+    ]); ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'level')->dropDownList([ 'beginner' => 'Beginner', 'intermediate' => 'Intermediate', 'advanced' => 'Advanced', ], ['prompt' => '']) ?>
+    <?= $form->field($files, 'files[]')->fileInput(['multiple' => true]) ?>
 
     <div class="form-group mt-3 mb-3">
         <?= Html::submitButton('Добавить', ['class' => 'btn btn-success w-100']) ?>

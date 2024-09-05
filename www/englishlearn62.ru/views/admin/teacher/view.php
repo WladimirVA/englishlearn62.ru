@@ -2,9 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-
-/** @var yii\web\View $this */
-/** @var app\models\Teacher $model */
+use yii\bootstrap5\Breadcrumbs;
 
 $this->title = $model->gfn();
 $this->params['breadcrumbs'][] = ['label' => 'Teachers', 'url' => ['index']];
@@ -12,6 +10,25 @@ $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="container mt-3">
+    <div class="row mt-4">
+        <div class="col">
+            <?= Breadcrumbs::widget([
+                'links' => [
+                    [
+                        'label' => 'Мой кабинет',
+                        'url' => '/admin/home'
+                    ],
+                    [
+                        'label' => 'Преподаватели',
+                        'url' => '/admin/teacher'
+                    ],
+                    [
+                        'label' => $this->title,
+                    ],
+                ]
+            ]) ?>
+        </div>
+    </div>
     <div class="row">
         <div class="col-12 col-lg-7 mx-auto">
             <div class="teacher-view">

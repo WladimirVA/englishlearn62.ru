@@ -1,29 +1,44 @@
 <?php
 
 use yii\helpers\Html;
+use yii\bootstrap5\Breadcrumbs;
 
-/** @var yii\web\View $this */
-/** @var app\models\Lesson $model */
 
-$this->title = 'Update Lesson: ' . $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Lessons', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = 'Изменить урок ' . $model->title;
+
 ?>
-<div class="lesson-update">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
-
-</div>
 
 <div class="container mt-3">
+    <div class="row mt-4">
+        <div class="col">
+            <?= Breadcrumbs::widget([
+                'links' => [
+                    [
+                        'label' => 'Мой кабинет',
+                        'url' => '/teacher/home'
+                    ],
+                    [
+                        'label' => 'Уроки',
+                        'url' => '/teacher/lesson'
+                    ],
+                    [
+                        'label' => $this->title
+                    ]
+                ]
+            ]) ?>
+        </div>
+    </div>
     <div class="row">
         <div class="col-12 col-lg-7 mx-auto">
+            <div class="lesson-update">
 
+                <h1><?= Html::encode($this->title) ?></h1>
+
+                <?= $this->render('_form', [
+                    'model' => $model,
+                ]) ?>
+
+            </div>
         </div>
     </div>
 </div>

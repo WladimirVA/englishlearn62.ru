@@ -8,7 +8,9 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\Auth;
-
+use app\models\Course;
+use app\models\Exercise;
+use app\models\Lesson;
 
 class HomeController extends Controller
 {
@@ -37,7 +39,11 @@ class HomeController extends Controller
             return $this->redirect('/admin/login');
         }
 
-        return $this->render('statistic');
+        $c = Course::find()->count();
+        $e = Exercise::find()->count();
+        $l = Lesson::find()->count();
+
+        return $this->render('statistic' , compact('c', 'e', 'l'));
     }
 
 

@@ -38,14 +38,11 @@ class ExerciseController extends Controller
                 if ($sub->save()) {
                     Yii::$app->session->setFlash('success', 'Ответ отправлен на проверку');
                 }
-            }elseif($sub = Submission::find()->where(['student_id' => $student -> id, 'exercise_id' => $ex_id])->one()){
-
-                $sub -> submitted_answer = $answer;
-
-                if ($sub->save()) {
-                    Yii::$app->session->setFlash('success', 'Ответ отправлен на проверку');
-                }
             }
+        }
+
+        if(Yii::$app -> request -> isPjax){
+            return $this -> renderPartial('_alert');
         }
 
         return $this->render('index', compact('student', 'ex'));

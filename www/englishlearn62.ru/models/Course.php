@@ -11,6 +11,7 @@ use Yii;
  * @property string $title
  * @property string $description
  * @property string $level
+ * @property string|null $files
  * @property int $teacher_id
  * @property string|null $created_at
  *
@@ -34,8 +35,8 @@ class Course extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'description', 'level', 'teacher_id'], 'required'],
-            [['description', 'level'], 'string'],
+            [['title', 'description', 'teacher_id'], 'required'],
+            [['description', 'level', 'files'], 'string'],
             [['teacher_id'], 'integer'],
             [['created_at'], 'safe'],
             [['title'], 'string', 'max' => 100],
@@ -53,6 +54,7 @@ class Course extends \yii\db\ActiveRecord
             'title' => 'Название курса',
             'description' => 'Описание',
             'level' => 'Уровень',
+            'files' => 'Файлы',
             'teacher_id' => 'Преподаватель',
             'created_at' => 'Дата создания',
         ];
@@ -86,5 +88,14 @@ class Course extends \yii\db\ActiveRecord
     public function getTeacher()
     {
         return $this->hasOne(Teacher::class, ['id' => 'teacher_id']);
+    }
+
+    public function getFiles()
+    {
+        if(is_string($this -> files)){
+            return explode(PHP_EOL, $this -> files);
+        }else{
+            return null;
+        }
     }
 }

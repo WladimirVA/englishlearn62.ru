@@ -1,7 +1,19 @@
 <?php
+use yii\bootstrap5\Breadcrumbs;
 $this->title = 'Меню управления администратора'
 ?>
 <div class="container">
+    <div class="row mt-4">
+        <div class="col">
+            <?= Breadcrumbs::widget([
+                'links' => [
+                    [
+                        'label' => 'Мой кабинет',
+                    ],
+                ]
+            ]) ?>
+        </div>
+    </div>
     <div class="row mt-3">
         <div class="col-12 col-lg-8 mx-auto">
             <p class="text-center fs-4 font-monospace text-primary">
@@ -26,15 +38,6 @@ $this->title = 'Меню управления администратора'
                         <div class="card bg-primary rounded shadow">
                             <div class="card-body text-center">
                                 <h5 class="card-title text-white">Преподаватели</h5>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col">
-                    <a class="text-decoration-none" href="/admin/home/up">
-                        <div class="card bg-primary rounded shadow">
-                            <div class="card-body text-center">
-                                <h5 class="card-title text-white">Успеваемость</h5>
                             </div>
                         </div>
                     </a>

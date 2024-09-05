@@ -5,14 +5,27 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
-
-/** @var yii\web\View $this */
-/** @var yii\data\ActiveDataProvider $dataProvider */
+use yii\bootstrap5\Breadcrumbs;
 
 $this->title = 'Студенты';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="container mt-3">
+<div class="container">
+    <div class="row mt-4">
+        <div class="col">
+            <?= Breadcrumbs::widget([
+                'links' => [
+                    [
+                        'label' => 'Мой кабинет',
+                        'url' => '/admin/home'
+                    ],
+                    [
+                        'label' => 'Студенты',
+                    ],
+                ]
+            ]) ?>
+        </div>
+    </div>
     <div class="row">
         <div class="col-12 col-lg-9 mx-auto">
             <div class="student-index">

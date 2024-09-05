@@ -2,8 +2,21 @@
 use edofre\fullcalendar\Fullcalendar;
 use yii\web\JsExpression;
 $this->title = 'Преподаватель - '. $teacher -> gfn();
+use yii\bootstrap5\Breadcrumbs;
+
 ?>
 <div class="container">
+    <div class="row mt-4">
+        <div class="col">
+            <?= Breadcrumbs::widget([
+                'links' => [
+                    [
+                        'label' => 'Мой кабинет',
+                    ],
+                ]
+            ]) ?>
+        </div>
+    </div>
     <div class="row mt-5">
         <div class="col-12 col-lg-8 mx-auto">
             <p class="text-center fs-4 font-monospace text-danger">
