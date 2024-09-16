@@ -10,6 +10,7 @@ use yii\filters\VerbFilter;
 use app\models\Auth;
 use app\models\Course;
 use app\models\Exercise;
+use app\models\Feedback;
 use app\models\Lesson;
 
 class HomeController extends Controller
@@ -44,6 +45,43 @@ class HomeController extends Controller
         $l = Lesson::find()->count();
 
         return $this->render('statistic' , compact('c', 'e', 'l'));
+    }
+
+    public function actionFeedback()
+    {
+        $dataProvider = new ActiveDataProvider([
+            'query' => Feedback::find(),
+            'pagination' => [
+                'pageSize' => 3
+            ],
+            'sort' => [
+                'defaultOrder' => [
+                    'id' => SORT_DESC,
+                ]
+            ],
+        ]);
+
+        return $this->render('feedback', [
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+
+    public function actionDelete($id)
+    {
+        $this->findModel($id)->delete();
+
+        return $this->redirect('/admin/home/feedback');
+    }
+
+
+    protected function findModel($id)
+    {
+        if (($model = Feedback::findOne(['id' => $id])) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 
 

@@ -90,9 +90,11 @@ class Exercise extends \yii\db\ActiveRecord
     }
 
 
-    public function HasComment()
+    public function HasComment($student_id)
     {
-        $ex = $this -> submissions;
+        $ex = Submission::find()
+        ->where(['exercise_id' => $this -> id, 'student_id' => $student_id])
+        ->all();
 
         if(empty($ex)) return null;
         $last = end($ex);

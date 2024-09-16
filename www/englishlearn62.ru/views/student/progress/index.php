@@ -31,7 +31,7 @@ $this->title = 'Мой прогресс';
         <div class="col-12 col-lg-7 mx-auto">
             <?php foreach ($lessons as $ls): ?>
                 <?php $pr = $ls->get_progress($student->id)?>
-                <span class="mt-3">Урок № <?=$ls -> id?></span>
+                <a href="/student/lesson/view?id=<?=$ls -> id?>"><span class="mt-3">Урок № <?=$ls -> order?> (<?=$ls -> title?>)</span></a>
                 <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
                     <div class="progress-bar bg-success" style="width: <?=$pr?>%"><?=$pr?>%</div>
                 </div>

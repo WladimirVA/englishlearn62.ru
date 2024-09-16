@@ -40,8 +40,13 @@ class LessonController extends Controller
      */
     public function actionIndex()
     {
+        $teacher = Yii::$app->session->get('teacher');
+        $courses = Course::find() -> select('id') -> where(['teacher_id' => $teacher -> id])
+        ->column();
+
         $dataProvider = new ActiveDataProvider([
-            'query' => Lesson::find(),
+            'query' => Lesson::find()->where(['in', 'course_id', $courses]),
+
             /*
             'pagination' => [
                 'pageSize' => 50

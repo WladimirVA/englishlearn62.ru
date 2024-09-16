@@ -7,6 +7,9 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Course;
+use app\models\Lesson;
+use Yii;
 
 /**
  * ExerciseController implements the CRUD actions for Exercise model.
@@ -38,8 +41,13 @@ class ExerciseController extends Controller
      */
     public function actionIndex()
     {
+        $teacher = Yii::$app->session->get('teacher');
+        $courses = Course::find() -> select('id') -> where(['teacher_id' => $teacher -> id])
+        ->column();
+        $lessons = Lesson::find()->select('id')->where(['in', 'course_id', $courses])->column();
+
         $dataProvider = new ActiveDataProvider([
-            'query' => Exercise::find(),
+            'query' => Exercise::find()->where(['in', 'lesson_id', $lessons]),
             /*
             'pagination' => [
                 'pageSize' => 50

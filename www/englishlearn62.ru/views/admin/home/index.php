@@ -22,7 +22,7 @@ $this->title = 'Меню управления администратора'
         </div>
     </div>
     <div class="row">
-        <div class="col-12 col-lg-9 mx-auto">
+        <div class="col-12 col-lg-9 mx-auto pb-4">
             <div class="row flex-column align-items-center justify-content-center row-cols-1 row-cols-lg-3 g-3">
                 <div class="col">
                     <a class="text-decoration-none" href="/admin/student/index">
@@ -47,6 +47,15 @@ $this->title = 'Меню управления администратора'
                         <div class="card bg-primary rounded shadow">
                             <div class="card-body text-center">
                                 <h5 class="card-title text-white">Статистика</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col">
+                    <a class="text-decoration-none" href="/admin/home/feedback">
+                        <div class="card bg-primary rounded shadow">
+                            <div class="card-body text-center">
+                                <h5 class="card-title text-white">Обратная связь</h5>
                             </div>
                         </div>
                     </a>

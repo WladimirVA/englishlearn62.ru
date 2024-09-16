@@ -18,7 +18,7 @@ use yii\bootstrap5\NavBar;
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a href="/" class="nav-link d-flex flex-column">
-                            <span class="fs-4 fw-bold text-info fst-italic" style="text-shadow: white 1px 1px 1px;">
+                            <span class="fs-5 fw-bold text-info fst-italic" style="text-shadow: white 1px 1px 1px;">
                                 <?= Yii::$app->name ?>
                             </span>
                             <small class="text-info font-monospace">
@@ -33,6 +33,9 @@ use yii\bootstrap5\NavBar;
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white fw-bold" href="/about">О проекте</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white fw-bold" href="/feedback">Обратная связь</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">

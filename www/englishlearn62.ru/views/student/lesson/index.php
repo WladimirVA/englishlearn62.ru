@@ -42,13 +42,15 @@ $this->title = 'Мои уроки';
                             <?php $ex = Exercise::find()->where(['lesson_id' => $l -> id])->all() ?>
                             <ul>
                                 <?php foreach($ex as $e):?>
-                                   <li>
-                                        Задание № <?=$e -> id?>
+                                   <li><?php if(!isset($i)) $i = 1;?>
+                                        Задание № <?=$i?>
                                         <?=$e -> is_correct_sub($student -> id)?'&#9989':''?>
-                                        <?=(bool)($cmt = $e -> hasComment())?"<button type=\"button\" class=\"btn btn-sm btn-danger rounded\" data-bs-toggle=\"tooltip\" data-bs-placement=\"top\"data-bs-custom-class=\"custom-tooltip\"data-bs-title=\"$cmt\">Получен ответ</button>":""?>
+                                        <?=(bool)($cmt = $e -> hasComment($student -> id))?"<button type=\"button\" class=\"btn btn-sm btn-danger rounded\" data-bs-toggle=\"tooltip\" data-bs-placement=\"top\"data-bs-custom-class=\"custom-tooltip\"data-bs-title=\"$cmt\">Получен ответ</button>":""?>
 
                                    </li>
+                                   <?php $i++; ?>
                                 <?php endforeach ?>
+                                <?php unset($i);?>
                             </ul>
                         </li>
                     <?php endforeach?>
